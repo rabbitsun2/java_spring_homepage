@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+@charset "utf-8";
+	@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+	
+body{
+   	margin: 0;
+   	padding: 0;
+   	
+   	font-family:'Nanum Gothic', sans-serif;
+   	
+}
+
+a{
+	text-decoration:none;
+	color:#000;
+}
+
+#cakeon_header_logo{
+	padding-top:-30px;
+	padding-left:20%;
+	height:30px;
+}
+
+#cakeon_home_header_logo{
+	padding-left:20%;
+}
+
+.cakeon_web_tbl{
+	margin-top:10px;
+   	width:100%;
+   	border-collapse : collapse;
+	border-spacing : 0;
+}
+
+.cakeon_web_tbl td{
+   	border:1px solid #e2e2e2;
+   	text-align:center;
+   	height:30px;
+   	background-color:#FFF;
+}
+
+#topMenu {
+	background:#E6E6E6;
+     	height: 30px;
+     	width: 100%;
+   }
+   
+   #topMenu ul {
+   	width:70%;
+   	margin: 0 auto;
+   	overflow: hidden;
+   
+   }
+
+   #topMenu ul li {
+    	list-style: none;
+    	float: left;
+    	line-height: 25px;
+    	width:100px;
+    	height:30px;
+    	background-color: #D8D8D8;
+    	
+    	vertical-align: middle;
+    	text-align: center;
+    	
+    	color: white;
+   }
+
+   #topMenu ul li a {
+   	font-weight:bold;
+       display: block;
+   }
+   #topMenu a:hover {
+       background-color: #4d4d4d;
+       color: red;
+   }
+   
+   #membership {
+   	
+   }
+
+   #membership ul {
+   	width:70%;
+   	margin: 0 auto;
+   	overflow: hidden;
+   
+   }
+
+   #membership ul li {
+    	list-style: none;
+    	float: right;
+    	line-height: 25px;
+    	width:100px;
+  	}
+  	
+  	#footerMenu {
+   	text-align:center;
+   }
+
+   #footerMenu ul {
+   	width:70%;
+   	margin: 0 auto;
+   	overflow: hidden;
+   
+   }
+
+   #footerMenu ul li {
+    	list-style: none;
+    	float: left;
+    	line-height: 25px;
+    	width:120px;
+  	}

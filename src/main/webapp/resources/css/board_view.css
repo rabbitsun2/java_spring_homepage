@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+
+.cakeon_view_tbl{
+   	width:100%;
+   	border-collapse : collapse;
+	border-spacing : 0;
+}
+
+.cakeon_view_tbl td{
+   	border:1px solid #e2e2e2;
+   	text-align:center;
+   	height:30px;
+}
+
+.cakeon_view_tbl .item{
+	background-color:#e6e6e6;
+	width:10%;
+}
+
+.cakeon_view_tbl .item_password{
+	background-color:#FFFFFF;
+	width:40%;
+}
+
+.cakeon_view_tbl .item_input{
+	width:100%;
+	text-align:left;
+}
+
+.cakeon_view_tbl .item_input_password{
+	width:98%;
+	text-align:left;
+}
+
+.cakeon_view_tbl #header_item_font{
+	font-size:12px;
+	font-weight:bold;
+}
+
+.cakeon_view_tbl .item_textarea{
+	width:100%;
+	text-align:left;
+}
+
+.cakeon_view_tbl #item_font{
+	font-size:14px;
+}
+
+.cakeon_view_btn{
+	width:100px;
+	height:40px;
+	background-color:#e8e8e8;
+}
+
+.cakeon_view_file_tbl{
+	width:100%;
+   	border-collapse : collapse;
+	border-spacing : 0;
+}
+
+.cakeon_view_file_tbl td{
+   	border:1px solid #e2e2e2;
+   	text-align:center;
+   	height:30px;
+}

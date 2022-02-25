@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cakeon.mapper.DbmsMapper">
+	
+	<!-- 오라클 TableName 조회 
+	<select id="IsSelectTableName"
+		resultType="Integer">
+		<![CDATA[ 
+			select count(*) from all_tables 
+			where table_name = upper('cakeon_board_${tablename}')
+		]]>
+	</select>
+ 	-->
+ 	
+ 	<select id="IsSelectTableName"
+		resultType="Integer">
+		<![CDATA[
+		SELECT COUNT(*) FROM Information_schema.tables
+			WHERE table_name = 'cakeon_board_${tablename}'
+		]]>
+	</select>
+
+</mapper>

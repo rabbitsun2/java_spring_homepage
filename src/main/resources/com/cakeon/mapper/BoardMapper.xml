@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cakeon.mapper.BoardMapper">
+
+	<!-- MariaDB 쿼리 -->
+	<select id="getTime" resultType="String">
+			select sysdate()
+	</select> 
+	<select id="selectAllBoard" 
+				resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[ 
+			select * from cakeon_board_${boardname} order by id
+		]]>
+	</select>
+	<select id="selectPagingBoard"
+		resultType="com.cakeon.board.model.BoardDTO">
+		
+		<![CDATA[ 
+			SELECT * FROM cakeon_board_${boardname} 
+				ORDER by id desc 
+				LIMIT #{limnum} OFFSET #{startnum}
+		]]>
+		
+	</select>
+	
+	<select id="selectAllCount"
+		parameterType="HashMap"
+		resultType="Integer">
+		<![CDATA[
+			select count(*) from cakeon_board_${boardname}
+		]]>
+	</select>
+	<select id="selectBoard" 
+				resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[ 
+			select * from cakeon_board_${boardname} where id = #{id}
+		]]>
+	</select>
+	
+	<select id="selectSubjectPagingBoard"
+		resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[
+			SELECT * FROM cakeon_board_${boardname} 
+				WHERE subject like '%${subject}%' 
+				ORDER by id desc 
+				LIMIT #{limnum} OFFSET #{startnum}
+		]]>
+	</select>
+	
+	<select id="selectAllSubjectCount"
+		parameterType="HashMap"
+		resultType="Integer">
+		<![CDATA[
+			select count(*) from cakeon_board_${boardname} 
+			where subject like '%${subject}%'
+		]]>
+	</select>
+	
+	<select id="selectArticle"
+				resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[
+			select * from cakeon_board_${boardname} 
+			where 
+				author = '${author}' and 
+				passwd = '${passwd}' and 
+				subject = '${subject}' and 
+				email = '${email}' and 
+				memo = '${memo}' and 
+				regidate = '${regidate}' and 
+				ip = '${ip}' and 
+				cnt = #{cnt}
+		]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="HashMap">
+		<![CDATA[ 
+			insert into cakeon_board_${boardname}
+			(
+				author, passwd, subject, email,
+				memo, ip, regidate, cnt
+			) values(
+				'${author}',
+				'${passwd}',
+				'${subject}',
+				'${email}',
+				'${memo}',
+				'${ip}',
+				'${regidate}',
+				#{cnt}
+			)			
+		]]>
+	</insert>
+	<insert id="insertBoardFileInfo" parameterType="HashMap">
+		<![CDATA[
+			insert into cakeon_board_file_${boardname} 
+			(
+				article_id, saveFolder, originFile, saveFile,
+				ext, ip, regidate
+			) 
+			values
+			(
+				${article_id}, 
+				'${saveFolder}', 
+				'${originFile}', 
+				'${saveFile}', 
+				'${ext}', 
+				'${ip}', 
+				'${regidate}'
+			)
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="HashMap">
+		<![CDATA[
+			update cakeon_board_${boardname} set 
+			author = '${author}',
+			subject = '${subject}',
+			email = '${email}',
+			memo = '${memo}',
+			ip = '${ip}' 
+			where id = #{id}
+		]]>
+	</update>
+	<delete id="deleteBoard" parameterType="HashMap">
+		<![CDATA[
+			delete from cakeon_board_${boardname} 
+			where id = #{id}			
+		]]>
+		
+	</delete>
+	<delete id="deleteBoardFileInfo" parameterType="HashMap">
+		<![CDATA[
+			delete from cakeon_board_file_${boardname} 
+				where  
+					id = #{id} and 
+					article_id = #{article_id}
+		]]>
+	</delete>
+	<select id="selectRngBoardFileInfo" parameterType="HashMap"
+		resultType="com.cakeon.board.model.BoardFileInfoDTO">
+		<![CDATA[
+			select * from cakeon_board_file_${boardname} 
+				where 
+					article_id = #{article_id} 
+						order by id
+		]]>
+	</select>
+	<select id="selectOneBoardFileInfo" parameterType="HashMap" 
+		resultType="com.cakeon.board.model.BoardFileInfoDTO">
+		<![CDATA[
+			select * from cakeon_board_file_${boardname} 
+				where 
+					id = #{id} and 
+					originFile = '${originFile}'
+		]]>
+	</select>
+	
+	<select id="getIdBoardFileInfo" parameterType="HashMap" 
+		resultType="com.cakeon.board.model.BoardFileInfoDTO">
+		<![CDATA[
+			select * from cakeon_board_file_${boardname} 
+				where 
+					id = #{id}
+		]]>
+	</select>
+</mapper>
+
+<!-- 오라클(Oracle 11g) 쿼리 
+	<select id="getTime" resultType="String">
+		select sysdate from dual
+	</select>
+	
+	<select id="selectAllBoard" 
+				resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[ 
+			select * from cakeon_board_${boardname} order by id
+		]]>
+	</select>
+	
+	<select id="selectPagingBoard"
+		resultType="com.cakeon.board.model.BoardDTO">
+		
+		<![CDATA[ 
+			SELECT * FROM ( 
+				SELECT /*+ INDEX_DESC(Z OP_SAMPLE_PK) */ ROWNUM AS RNUM, Z.* FROM ( 
+				SELECT * FROM cakeon_board_${boardname} order by id desc 
+				) Z WHERE ROWNUM <= #{endnum}
+			) WHERE RNUM >= #{startnum}
+		]]>
+		
+	</select>
+	
+	<select id="selectKeywordPagingBoard"
+		resultType="com.cakeon.board.model.BoardDTO">
+		
+		<![CDATA[ 
+			SELECT * FROM ( 
+				SELECT /*+ INDEX_DESC(Z OP_SAMPLE_PK) */ ROWNUM AS RNUM, Z.* FROM ( 
+				SELECT * FROM cakeon_board_${boardname} order by id desc 
+				) Z WHERE ROWNUM <= #{endnum}
+			) WHERE RNUM >= #{startnum}
+		]]>
+		
+	</select>
+	
+	<select id="selectAllCount"
+		parameterType="HashMap"
+		resultType="Integer">
+		<![CDATA[
+			select count(*) from cakeon_board_${boardname}
+		]]>
+	</select>
+	
+	<select id="selectBoard" 
+				resultType="com.cakeon.board.model.BoardDTO">
+		<![CDATA[ 
+			select * from cakeon_board_${boardname} where id = #{id}
+		]]>
+	</select>
+	
+	<insert id="insertBoard" parameterType="HashMap">
+		<![CDATA[ 
+			insert into cakeon_board_${boardname}
+			(
+				author, passwd, subject, email,
+				memo, ip, regidate, cnt
+			) values(
+				'${author}',
+				'${passwd}',
+				'${subject}',
+				'${email}',
+				'${memo}',
+				'${ip}',
+				'${regidate}',
+				${cnt}
+			)			
+		]]>
+	</insert>
+	
+	<insert id="insertBoardFileInfo" parameterType="HashMap">
+		<![CDATA[
+			insert into cakeon_board_file_${boardname} 
+			(
+				article_id, saveFolder, originFile, saveFile,
+				ext, ip, regidate
+			) 
+			values
+			(
+				${article_id}, 
+				'${saveFolder}', 
+				'${originFile}', 
+				'${saveFile}', 
+				'${ext}', 
+				'${ip}', 
+				'${regidate}'
+			)
+		]]>
+	</insert>
+	
+	<update id="updateBoard" parameterType="HashMap">
+		<![CDATA[
+			update cakeon_board_${boardname} set 
+			author = '${author}',
+			subject = '${subject}',
+			email = '${email}',
+			memo = '${memo}',
+			ip = '${ip}' 
+			where id = ${id}
+		]]>
+	</update>
+ -->

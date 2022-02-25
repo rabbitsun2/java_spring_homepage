@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+.cakeon_member_login_tbl{
+	margin:auto;
+   	width:40%;
+   	border-collapse : collapse;
+	border-spacing : 0;
+}
+
+.cakeon_member_login_tbl td{
+   	border:1px solid #e2e2e2;
+   	text-align:center;
+   	background-color:#e6e6e6;
+}
+
+.cakeon_member_login_tbl td .item{
+   	border:1px solid #e2e2e2;
+   	text-align:center;
+   	background-color:#e6e6e6;
+   	width:20%;
+}
+
+#cakeon_member_login_container{
+	text-align:center;
+}
